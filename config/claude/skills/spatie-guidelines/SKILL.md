@@ -374,7 +374,7 @@ tests/
 ## Git & GitHub Workflow
 
 ### Branch Naming
-- Feature branches: `feature-mailchimp`, `fix-deliverycosts`
+- Feature branches: `feature/mailchimp`, `fix/deliverycosts`
 - Use present tense, descriptive commit messages
 - Master/main always stable after go-live
 
