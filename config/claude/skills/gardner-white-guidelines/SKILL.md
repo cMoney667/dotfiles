@@ -1,5 +1,5 @@
 ---
-name: spatie-guidelines
+name: gardner-white-guidelines
 description: Spatie's coding guidelines and conventions. Use when writing PHP, Laravel, JavaScript, or Vue code for Spatie projects or packages. Covers code style, naming, routing, controllers, Blade, validation, Git workflow, package structure, testing (Pest), and service providers. Triggers include "follow Spatie guidelines", "Spatie style", "Spatie package", or any code review for Spatie packages/projects.
 ---
 
@@ -14,6 +14,7 @@ Apply these guidelines when writing code for Spatie projects or contributing to 
 ## PHP Style
 
 ### Type System
+
 - Type properties, parameters, and return types. Skip docblocks for fully typed methods.
 - Use `?Type` (short nullable), not `Type|null`.
 - Use `void` return type when a method returns nothing.
@@ -29,6 +30,7 @@ class MyClass {
 ```
 
 ### Docblocks
+
 - Skip docblocks for fully type-hinted methods unless you need a description.
 - Use full sentences with a period for descriptions.
 - Always import classnames in docblocks (use FQCNs like `\Spatie\Url\Url`).
@@ -37,6 +39,7 @@ class MyClass {
 - If a function needs one docblock param, add all other params too.
 
 ### Code Style
+
 - PSR-1, PSR-2, PSR-12.
 - Don't use `final` by default.
 - Prefer string interpolation: `"Hi, I am {$name}."`
@@ -52,6 +55,7 @@ class MyClass
 ```
 
 ### Control Flow
+
 - **Happy path last** — handle failures first, return early.
 - **Avoid `else`** — refactor to early returns or ternaries.
 - **Separate compound ifs** — individual `if` statements over `&&` chains.
@@ -60,6 +64,7 @@ class MyClass
 - No extra empty lines between `{}` brackets.
 
 ### Comments
+
 - Avoid comments. Write expressive code instead.
 - Refactor comments into descriptively named methods.
 
@@ -68,12 +73,14 @@ class MyClass
 ## Laravel Conventions
 
 ### Configuration
+
 - Config filenames: **kebab-case** (`media-library.php`, `permission.php`)
 - Config keys: **snake_case** (`'chrome_path' => env('CHROME_PATH')`)
 - Never use `env()` outside config files.
 - Service-specific config goes in `config/services.php`, not a new file.
 
 ### Routing
+
 - URLs: **kebab-case** (`/open-source`, `/front-end-developer`)
 - Route names: **camelCase** (`->name('openSource')`)
 - Route parameters: **camelCase** (`{newsItem}`)
@@ -82,32 +89,38 @@ class MyClass
 - Don't prefix URLs with `/` (except root `/`)
 
 ### API Routing
+
 - Plural resource names: `/errors`, `/error-occurrences`
 - Kebab-case resources
 - Limit deep nesting. Prefer `/error-occurrences/1` over `/projects/1/errors/1/error-occurrences/1`
 - Nest only when context is necessary: `/errors/1/occurrences`
 
 ### Controllers
+
 - **Plural** resource name + `Controller` suffix: `PostsController`
 - Stick to CRUD keywords: `index`, `create`, `store`, `show`, `edit`, `update`, `destroy`
 - Extract new controllers for non-CRUD actions (e.g., `FavoritePostsController` with `store`/`destroy`)
 - Invokable controllers for single actions: `PerformCleanupController`
 
 ### Views & Blade
+
 - View files: **camelCase** (`openSource.blade.php`)
 - Indent with 4 spaces.
 - No spaces after directives: `@if($condition)`
 - Use `__()` for translations, not `@lang`
 
 ### Validation
+
 - Always array notation: `['required', 'email']`, never pipe `'required|email'`
 - Custom rules: **snake_case** (`organisation_type`)
 
 ### Authorization
+
 - Policies: **camelCase** (`editPost`)
 - Use CRUD words; replace `show` with `view`
 
 ### Artisan Commands
+
 - Command names: **kebab-case** (`delete-old-records`)
 - Always output feedback. Minimum: `$this->comment('All ok!')` at end.
 - For batch processing: output progress per item, summary at end.
@@ -115,7 +128,7 @@ class MyClass
 ### Naming Classes
 
 | Type | Convention | Example |
-|------|-----------|---------|
+| ------ | ----------- | --------- |
 | Controller | Plural + `Controller` | `PostsController` |
 | Invokable Controller | Action + `Controller` | `PerformCleanupController` |
 | Model | Singular | `Post` |
@@ -187,11 +200,13 @@ class MediaLibraryServiceProvider extends PackageServiceProvider
 ```
 
 **Key lifecycle methods:**
+
 - `configurePackage()` — declare assets (config, migrations, views, commands)
 - `packageRegistered()` — bind interfaces, register singletons
 - `packageBooted()` — register observers, macros, blade directives
 
 ### Namespace Conventions
+
 - Root namespace: `Spatie\PackageName` (e.g., `Spatie\Permission`, `Spatie\MediaLibrary`)
 - Packagist name: `spatie/laravel-package-name` or `spatie/package-name`
 - Config file drops the `laravel-` prefix: `spatie/laravel-permission` → `config/permission.php`
@@ -238,6 +253,7 @@ return [
 ```
 
 ### Model Patterns
+
 - Use `$guarded = []` (not `$fillable`).
 - Configurable table names via config: `$this->table = config('permission.table_names.permissions') ?: parent::getTable();`
 - Provide static factory methods: `Permission::create()`, `Permission::findByName()`, `Permission::findOrCreate()`
@@ -245,6 +261,7 @@ return [
 - Use traits for shared behavior: `HasRoles`, `InteractsWithMedia`
 
 ### Config File Conventions
+
 - Verbose comments explaining each option in the config file.
 - Let users swap class implementations via config (models, generators, etc.).
 - Use `snake_case` keys throughout.
@@ -321,6 +338,7 @@ it('can create a data object from array', function () {
 ```
 
 ### What to Test
+
 - **Core functionality**: CRUD operations, main feature paths
 - **Edge cases**: null inputs, missing data, duplicate entries
 - **Custom exceptions**: verify domain errors throw correct exception types
@@ -329,6 +347,7 @@ it('can create a data object from array', function () {
 - **Artisan commands**: test output and side effects
 
 ### Test Helpers
+
 - Define internal test classes within the test file when possible:
 
 ```php
@@ -350,6 +369,7 @@ tests/
 ```
 
 ### composer.json Testing Stack
+
 ```json
 {
     "require-dev": {
@@ -374,11 +394,13 @@ tests/
 ## Git & GitHub Workflow
 
 ### Branch Naming
+
 - Feature branches: `feature/mailchimp`, `fix/deliverycosts`
 - Use present tense, descriptive commit messages
 - Master/main always stable after go-live
 
 ### PR Workflow for Spatie Packages
+
 1. Fork the repo and create a feature branch
 2. Write tests for new functionality
 3. Follow the code style (run `composer format` / Pint)
@@ -387,6 +409,7 @@ tests/
 6. Keep PRs small and focused
 
 ### Common Mistakes to Avoid
+
 - ❌ Using `env()` outside config files
 - ❌ Using pipe notation for validation rules (`'required|email'`)
 - ❌ Using `$fillable` instead of `$guarded = []` in package models
@@ -405,6 +428,7 @@ tests/
 ## Detailed References
 
 Load these as needed for full examples:
+
 - **Laravel & PHP style**: See `references/laravel-php.md`
 - **JavaScript style**: See `references/javascript.md`
 - **Git workflow**: See `references/version-control.md`

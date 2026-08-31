@@ -73,14 +73,14 @@ Identify the library/framework from the user's query:
 Task parameters:
 - subagent_type: Bash
 - description: "Search Context7 for library"
-- prompt: node .claude/skills/context7-auto-research/context7-api.js search "<library-name>" "<user-query>"
+- prompt: node ~/.claude/skills/context7-auto-research/context7-api.js search "<library-name>" "<user-query>"
 ```
 
 **Example:**
 
 ```
 Task: Search for Next.js
-Prompt: node .claude/skills/context7-auto-research/context7-api.js search "next.js" "How to configure middleware in Next.js 15"
+Prompt: node ~/.claude/skills/context7-auto-research/context7-api.js search "next.js" "How to configure middleware in Next.js 15"
 ```
 
 **Response format:**
@@ -122,14 +122,14 @@ From search results, choose the library based on:
 Task parameters:
 - subagent_type: Bash
 - description: "Fetch documentation from Context7"
-- prompt: node .claude/skills/context7-auto-research/context7-api.js context "<library-id>" "<specific-query>"
+- prompt: node ~/.claude/skills/context7-auto-research/context7-api.js context "<library-id>" "<specific-query>"
 ```
 
 **Example:**
 
 ```
 Task: Fetch Next.js middleware docs
-Prompt: node .claude/skills/context7-auto-research/context7-api.js context "/vercel/next.js" "middleware configuration"
+Prompt: node ~/.claude/skills/context7-auto-research/context7-api.js context "/vercel/next.js" "middleware configuration"
 ```
 
 **Response format:**
